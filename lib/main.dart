@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled7/screens/drawer_screen.dart';
-import 'package:untitled7/screens/login_screen.dart';
-import 'package:untitled7/screens/splash.dart';
+import 'package:untitled7/screens/main_screen.dart';
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: Splash(),
+      home: MainScreen(),
     );
   }
 }
