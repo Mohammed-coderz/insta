@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled7/screens/drawer_screen.dart';
-import 'package:untitled7/screens/login_screen.dart';
 import 'package:untitled7/screens/splash.dart';
 
 Future<void> main() async {

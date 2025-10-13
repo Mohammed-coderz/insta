@@ -1,9 +1,12 @@
+import 'dart:convert';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled7/core/const/svg_constant.dart';
 import 'package:untitled7/screens/sign_up.dart';
+import 'package:http/http.dart' as http;
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -16,6 +19,7 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isRememberMe = false;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -132,5 +136,23 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  login({required String phone, required String password}) async {
+    isLoading = true;
+    setState(() {});
+    final response = await http.post(
+      Uri.parse("https://9df19664a326.ngrok-free.app/ECOMMERCE/auth/login.php"),
+      body: jsonEncode({"phone": phone, "password": password}),
+      headers: {"Content-Type": "application/json"},
+    );
+    isLoading = false;
+    if (response.statusCode == 200) {
+      var jsonBody = jsonDecode(response.body);
+      if (jsonBody["result"]) {
+        String accessToken = jsonBody["access_token"];
+        SharedPref
+      }
+    }
   }
 }
