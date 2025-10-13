@@ -1,14 +1,21 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:untitled7/screens/grid_view_builder_screen.dart';
-import 'package:untitled7/screens/home_screen.dart';
-import 'package:untitled7/screens/image.dart';
-import 'package:untitled7/screens/list_view_builder_screen.dart';
-import 'package:untitled7/screens/list_view_screen.dart';
+import 'package:untitled7/screens/drawer_screen.dart';
 import 'package:untitled7/screens/login_screen.dart';
-import 'screens/first_screen.dart';
+import 'package:untitled7/screens/splash.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en'), Locale('ar')],
+      path: 'assets/translations',
+      fallbackLocale: Locale('en'),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -18,14 +25,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: Images(),
+      home: Splash(),
     );
   }
 }
-
