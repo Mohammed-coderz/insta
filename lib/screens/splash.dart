@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:untitled7/core/shared_preferences_helper.dart';
 import 'package:untitled7/screens/home_screen.dart';
 import 'package:untitled7/screens/login_screen.dart';
 
@@ -20,22 +21,11 @@ class _SplashState extends State<Splash> {
 
   goTo() {
     Future.delayed(Duration(seconds: 3), () async {
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
 
-      final bool? remember = prefs.getBool('isRememberMe');
+      final String? remember = await SharedPreferencesHelper.getString('accessToken');
       print("remember me value is : $remember");
       if (remember != null) {
-        if (remember) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-          );
-        } else {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => LoginScreen()),
-          );
-        }
+
       } else {
         Navigator.pushReplacement(
           context,

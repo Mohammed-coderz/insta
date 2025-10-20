@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled7/core/const/svg_constant.dart';
+import 'package:untitled7/core/shared_preferences_helper.dart';
+import 'package:untitled7/screens/home_screen.dart';
 import 'package:untitled7/screens/sign_up.dart';
 import 'package:http/http.dart' as http;
 
@@ -23,6 +25,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var h = MediaQuery.of(context).size.height;
+    var w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         title: Text("login".tr()),
@@ -52,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   "welcome".tr(),
                   style: TextStyle(color: Colors.blue, fontSize: 25),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: h*0.01),
                 TextField(
                   controller: emailController,
                   decoration: InputDecoration(
@@ -64,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     icon: Icon(Icons.email),
                   ),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: h*0.01),
                 TextField(
                   controller: passwordController,
                   obscureText: true,
@@ -77,7 +81,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     icon: Icon(Icons.password),
                   ),
                 ),
-                SizedBox(height: 50),
+                SizedBox(height: h*0.01),
 
                 Row(
                   children: [
@@ -94,7 +98,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Text("remember me"),
                   ],
                 ),
-                SizedBox(height: 25),
+                SizedBox(height: h*0.01),
                 ElevatedButton(
                   onPressed: () async {
                     final SharedPreferences prefs =
@@ -105,16 +109,24 @@ class _LoginScreenState extends State<LoginScreen> {
                   },
                   child: Text("test"),
                 ),
-                ElevatedButton(
-                  onPressed: () async {
-                    final SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    await prefs.setBool('isRememberMe', isRememberMe);
-                  },
 
-                  child: Text("login"),
-                ),
-                SizedBox(height: 50),
+                isLoading
+                    ? CircularProgressIndicator()
+                    : ElevatedButton(
+                        onPressed: () async {
+                          final SharedPreferences prefs =
+                              await SharedPreferences.getInstance();
+                          await prefs.setBool('isRememberMe', isRememberMe);
+
+                          login(
+                            phone: emailController.text,
+                            password: passwordController.text,
+                          );
+                        },
+
+                        child: Text("login"),
+                      ),
+                SizedBox(height: h*0.01),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -147,11 +159,19 @@ class _LoginScreenState extends State<LoginScreen> {
       headers: {"Content-Type": "application/json"},
     );
     isLoading = false;
+    setState(() {});
+    print(response.statusCode);
+    print(response.body);
+
     if (response.statusCode == 200) {
       var jsonBody = jsonDecode(response.body);
       if (jsonBody["result"]) {
         String accessToken = jsonBody["access_token"];
-        SharedPref
+        await SharedPreferencesHelper.saveString("accessToken", accessToken);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen()),
+        );
       }
     }
   }
