@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:untitled7/core/shared_preferences_helper.dart';
-import 'package:untitled7/screens/home_screen.dart';
-import 'package:untitled7/screens/login_screen.dart';
+import 'package:untitled7/core/utils/shared_preferences_helper.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -27,10 +24,7 @@ class _SplashState extends State<Splash> {
       if (remember != null) {
 
       } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => LoginScreen()),
-        );
+
       }
     });
   }
