@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:untitled7/core/utils/shared_preferences_helper.dart';
+import 'package:untitled7/screens/items_screen.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});
@@ -18,14 +19,10 @@ class _SplashState extends State<Splash> {
 
   goTo() {
     Future.delayed(Duration(seconds: 3), () async {
-
-      final String? remember = await SharedPreferencesHelper.getString('accessToken');
-      print("remember me value is : $remember");
-      if (remember != null) {
-
-      } else {
-
-      }
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => ItemsScreen()),
+      );
     });
   }
 
