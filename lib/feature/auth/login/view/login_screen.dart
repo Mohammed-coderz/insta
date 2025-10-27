@@ -2,10 +2,12 @@ import 'dart:convert';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled7/core/const/svg_constant.dart';
 import '../../../../core/const/api_const.dart';
 import '../../../../core/const/json_body_const.dart';
+import '../provider/login_provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -18,10 +20,11 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isRememberMe = false;
-  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
+    final loginProvider = Provider.of<LoginProvider>(context);
+
     var h = MediaQuery.of(context).size.height;
     var w = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -107,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Text("test"),
                 ),
 
-                isLoading
+                loginProvider.isLoading
                     ? CircularProgressIndicator()
                     : ElevatedButton(
                         onPressed: () async {
@@ -115,10 +118,10 @@ class _LoginScreenState extends State<LoginScreen> {
                               await SharedPreferences.getInstance();
                           await prefs.setBool('isRememberMe', isRememberMe);
 
-                          // login(
-                          //   phone: emailController.text,
-                          //   password: passwordController.text,
-                          // );
+                          loginProvider.login(
+                            phone: emailController.text,
+                            password: passwordController.text,
+                          );
                         },
 
                         child: Text("login"),
@@ -146,5 +149,4 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 }

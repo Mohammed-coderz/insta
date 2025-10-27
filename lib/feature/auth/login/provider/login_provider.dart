@@ -30,7 +30,8 @@ class LoginProvider with ChangeNotifier {
       var jsonBody = jsonDecode(response.body);
       loginModel = LoginModel.fromJson(jsonBody);
       if (jsonBody["result"]) {
-        String? accessToken = loginModel!.accessToken;
+        String? accessToken = loginModel!.accessToken ?? "abc";
+        print(loginModel!.accessToken);
         // String accessToken = jsonBody["access_token"];
       }
     }
