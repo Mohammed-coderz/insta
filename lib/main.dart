@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:untitled7/screens/splash.dart';
 
 import 'feature/auth/login/cubit/login_cubit.dart';
+import 'feature/auth/signup/cubit/Signup_cubit.dart';
 
 
 Future<void> main() async {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => SignupCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
