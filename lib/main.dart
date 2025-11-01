@@ -2,10 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:untitled7/screens/splash.dart';
+import 'package:untitled7/feature/splash/splash.dart';
 
 import 'feature/auth/login/cubit/login_cubit.dart';
 import 'feature/auth/signup/cubit/Signup_cubit.dart';
+import 'feature/home/cubit/get_categories_cubit.dart';
 
 
 Future<void> main() async {
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => LoginCubit()),
         BlocProvider(create: (context) => SignupCubit()),
+        BlocProvider(create: (context) => GetCategoriesCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

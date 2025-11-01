@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:untitled7/core/const/svg_constant.dart';
 import 'package:untitled7/feature/auth/signup/view/signup_screen.dart';
+import '../../../main/view/main_screen.dart';
 import '../cubit/login_cubit.dart';
 import '../state/login_state.dart';
 
@@ -107,6 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         if (state is OnLoadedLoginState) {
                           final prefs = await SharedPreferences.getInstance();
                           await prefs.setString('accessToken', state.token);
+                          String Token = prefs.getString('accessToken') ?? 'No Token';
+                          print("Token is : $Token");
                           await _persistRememberMe();
 
                           if (mounted) {
@@ -119,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => const Text("home screen"),
+                                builder: (_) =>  MainScreen(),
                               ),
                             );
                           }
