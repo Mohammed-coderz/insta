@@ -24,7 +24,7 @@ class GetCategoriesCubit extends Cubit<GetCategoriesState> {
         Uri.parse(ApiConst.getCategories),
         headers: {
           "Content-Type": "application/json",
-          'Authorization': 'Bearer ${token}',
+          'Authorization': 'Bearer $token',
         },
       );
 
