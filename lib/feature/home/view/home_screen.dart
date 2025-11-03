@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    context.read<GetCategoriesCubit>().GetCategories();
+    context.read<GetCategoriesCubit>().getCategories();
   }
 
   @override
@@ -29,7 +29,8 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (context, state) {
             if (state is OnStartGetCategoriesState) {
               return Center(child: CircularProgressIndicator());
-            } else if (state is OnLoadedGetCategoriesState) {
+            }
+            else if (state is OnLoadedGetCategoriesState) {
               return GridView.builder(
                 itemCount: state.categories.data!.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -53,14 +54,15 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               );
-            } else if (state is OnErrorGetCategoriesState) {
+            }
+            else if (state is OnErrorGetCategoriesState) {
               return Center(
                 child: Column(
                   children: [
                     Text(state.errorMessage),
                     ElevatedButton(
                       onPressed: () {
-                        context.read<GetCategoriesCubit>().GetCategories();
+                        context.read<GetCategoriesCubit>().getCategories();
                       },
                       child: Text("try again"),
                     ),

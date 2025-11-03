@@ -13,7 +13,7 @@ class GetCategoriesCubit extends Cubit<GetCategoriesState> {
   static GetCategoriesCubit get(BuildContext context) =>
       BlocProvider.of(context);
 
-  void GetCategories() async {
+  void getCategories() async {
     emit(OnStartGetCategoriesState());
 
     try {
