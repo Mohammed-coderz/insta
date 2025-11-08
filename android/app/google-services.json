@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "13970048109",
+    "project_id": "fundev-7",
+    "storage_bucket": "fundev-7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:13970048109:android:f8fab44f0cd5bf2b8ceb64",
+        "android_client_info": {
+          "package_name": "com.example.untitled7"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqMtipRANhLEiQo6dZcgo1A-BpktzwEfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
