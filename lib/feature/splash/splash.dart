@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:untitled7/core/utils/shared_preferences_helper.dart';
-import 'package:untitled7/feature/auth/login/view/login_screen.dart';
+
+import '../auth/presentation/login/view/login_screen.dart';
 
 class Splash extends StatefulWidget {
   const Splash({super.key});

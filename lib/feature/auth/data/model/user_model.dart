@@ -1,11 +1,14 @@
-class UserModel {
-  int? id;
-  String? username;
-  String? email;
-  String? phone;
-  String? role;
 
-  UserModel({this.id, this.username, this.email, this.phone, this.role});
+import '../../domain/entities/user_entity.dart';
+
+class UserModel extends UserEntity {
+  UserModel({
+    required super.id,
+    required super.username,
+    required super.email,
+    required super.phone,
+    required super.role,
+  });
 
   UserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
