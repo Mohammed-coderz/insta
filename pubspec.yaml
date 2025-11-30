@@ -43,6 +43,7 @@ dependencies:
   provider: ^6.1.5+1
   flutter_bloc: ^9.1.1
   image_picker: ^1.0.7
+  google_mobile_ads: ^5.1.0
 
 dev_dependencies:
   flutter_test:
